@@ -12,6 +12,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (!Utils.isAssistantEnabled(applicationContext)) {
+            startActivity(Intent(Settings.ACTION_VOICE_INPUT_SETTINGS))
+        }
+
         settingsButton.setOnClickListener { startActivity(Intent(Settings.ACTION_VOICE_INPUT_SETTINGS)) }
     }
 }
