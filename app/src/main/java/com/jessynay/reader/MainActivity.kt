@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity() {
 
         if (!Utils.isAssistantEnabled(applicationContext)) {
             startActivity(Intent(Settings.ACTION_VOICE_INPUT_SETTINGS))
+        } else {
+            settingsButton.visibility = View.GONE
         }
 
         settingsButton.setOnClickListener { startActivity(Intent(Settings.ACTION_VOICE_INPUT_SETTINGS)) }
