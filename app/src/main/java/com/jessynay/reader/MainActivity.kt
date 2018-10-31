@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,12 +13,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (!Utils.isAssistantEnabled(applicationContext)) {
-            startActivity(Intent(Settings.ACTION_VOICE_INPUT_SETTINGS))
-        } else {
-            settingsButton.visibility = View.GONE
-        }
-
+        updateSettingsButton()
         settingsButton.setOnClickListener { startActivity(Intent(Settings.ACTION_VOICE_INPUT_SETTINGS)) }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateSettingsButton()
+    }
+
+    fun updateSettingsButton() {
+        if (Utils.isAssistantEnabled(applicationContext)) {
+            settingsButton.visibility = View.GONE
+        } else {
+            settingsButton.visibility = View.VISIBLE
+        }
     }
 }
